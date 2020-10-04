@@ -3,7 +3,9 @@ import React from "react";
 export const Header = () => {
   return (
     <h1>
-      MailR<span className="purple">o</span>lo
+      <i>
+        Mailr<span className="purple">o</span>lo
+      </i>
     </h1>
   );
 };

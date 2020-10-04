@@ -34,7 +34,7 @@ export const EmailViewLayout = () => {
         tab={
           <span>
             <SendOutlined />
-            sent
+            SENT
           </span>
         }
         key="1"
@@ -45,7 +45,7 @@ export const EmailViewLayout = () => {
         tab={
           <span>
             <MailOutlined />
-            inbox
+            INBOX
           </span>
         }
         key="2"
