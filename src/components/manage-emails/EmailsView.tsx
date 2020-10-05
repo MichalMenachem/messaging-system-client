@@ -2,12 +2,12 @@ import { Button } from "antd";
 import React from "react";
 import { EmailViewLayout } from "./EmailViewLayout";
 import { SearchBar } from "./search-bar/SearchBar";
+import "./emails-view.css";
 
 export const EmailsView = () => {
   return (
-    <div>
+    <div className="emails-view">
       <SearchBar />
-      <Button>Send email</Button>
       <EmailViewLayout />
     </div>
   );

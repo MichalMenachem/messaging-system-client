@@ -1,0 +1,8 @@
+.email-header-item {
+  padding-right: 10px;
+}
+
+.email-header {
+  display: flex;
+  justify-content: space-between;
+}

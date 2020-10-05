@@ -29,18 +29,7 @@ export const EmailViewLayout = () => {
   ]);
 
   return (
-    <Tabs defaultActiveKey="2">
-      <TabPane
-        tab={
-          <span>
-            <SendOutlined />
-            SENT
-          </span>
-        }
-        key="1"
-      >
-        <Emails emails={sent} />
-      </TabPane>
+    <Tabs centered defaultActiveKey="inbox">
       <TabPane
         tab={
           <span>
@@ -48,9 +37,20 @@ export const EmailViewLayout = () => {
             INBOX
           </span>
         }
-        key="2"
+        key="inbox"
       >
-        <Emails emails={received} />
+        <Emails emails={received} isInbox={true} />
+      </TabPane>
+      <TabPane
+        tab={
+          <span>
+            <SendOutlined />
+            SENT
+          </span>
+        }
+        key="sent"
+      >
+        <Emails emails={sent} isInbox={false} />
       </TabPane>
     </Tabs>
   );
