@@ -1,7 +1,8 @@
 import React from "react";
-import { Form, Input, InputNumber, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import { Message } from "../../models/Message";
 import "./email-writer.css";
+import axios from "axios";
 
 const layout = {
   labelCol: { span: 3 },
@@ -9,23 +10,31 @@ const layout = {
 };
 
 const validateMessages = {
+  // eslint-disable-next-line
   required: "${label} is required!",
-  types: {
-    email: "${label} is not validate email!",
-    number: "${label} is not a validate number!",
-  },
-  number: {
-    range: "${label} must be between ${min} and ${max}",
-  },
 };
 
 export const EmailWriter = () => {
-  const onFinish = (values: Omit<Message, "creationDate">) => {
-    console.log(values);
+  const [form] = Form.useForm();
+
+  const onFinish = async (values: Omit<Message, "creationDate">) => {
+    try {
+      await axios.post(
+        `http://localhost:8080/messages/${values.sender}/writeMessage`,
+        { ...values, creationDate: new Date() }
+      );
+      message.success("Message successfuly sent");
+      console.log(values);
+    } catch (error) {
+      console.error(error);
+      message.error("Oops... Something went wrong");
+    }
+    form.resetFields();
   };
 
   return (
     <Form
+      form={form}
       className="email-form"
       {...layout}
       name="nest-messages"

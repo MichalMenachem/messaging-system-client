@@ -37,7 +37,6 @@ function App() {
             </Route>
             <Route path="/write">
               <EmailWriter />
-              {/* <p>hello</p> */}
             </Route>
           </Switch>
         </PageHeader>

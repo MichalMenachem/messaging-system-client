@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import React from "react";
 import { EmailViewLayout } from "./EmailViewLayout";
 import { SearchBar } from "./search-bar/SearchBar";
