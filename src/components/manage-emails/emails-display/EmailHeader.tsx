@@ -16,7 +16,7 @@ export const EmailHeader = (props: EmailHeaderProps) => {
       </span>
       <b className="email-header-item">{props.subject}</b>
       <span className="email-header-item">
-        {props.creationDate.toLocaleDateString()}
+        {props.creationDate.toLocaleString()}
       </span>
       <Button
         icon={<DeleteOutlined />}

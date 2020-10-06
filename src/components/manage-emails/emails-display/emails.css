@@ -6,3 +6,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.email-content {
+  text-align: left;
+}
