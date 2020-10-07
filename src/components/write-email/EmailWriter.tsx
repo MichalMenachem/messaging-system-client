@@ -26,7 +26,6 @@ export const EmailWriter = () => {
         creationDate: new Date().toJSON(),
       });
       message.success("Message successfuly sent");
-      console.log(values);
     } catch (error) {
       console.error(error);
       message.error("Oops... Something went wrong");
