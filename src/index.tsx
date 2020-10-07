@@ -3,15 +3,14 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 export const UrlContext = React.createContext("http://localhost:8080");
 
 ReactDOM.render(
   <React.StrictMode>
-    <UrlContext.Provider value={process.env.BASEURL || "http://localhost:8080"}>
+    <UrlContext.Provider
+      value={process.env.REACT_APP_BASEURL || "http://localhost:8080"}
+    >
       <App />
     </UrlContext.Provider>
   </React.StrictMode>,
