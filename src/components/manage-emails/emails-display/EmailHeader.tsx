@@ -3,7 +3,7 @@ import { Button, message, Popconfirm } from "antd";
 import axios from "axios";
 import React, { useContext } from "react";
 import { MessageWithId } from "../../../models/Message";
-import { RefreshContext } from "../EmailViewLayout";
+import { RefreshContext } from "../EmailsView";
 import "./emails.css";
 
 interface EmailHeaderProps extends MessageWithId {
