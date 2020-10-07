@@ -2,6 +2,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button, message, Popconfirm } from "antd";
 import axios from "axios";
 import React, { useContext } from "react";
+import { UrlContext } from "../../..";
 import { MessageWithId } from "../../../models/Message";
 import { RefreshContext } from "../EmailsView";
 import "./emails.css";
@@ -12,6 +13,7 @@ interface EmailHeaderProps extends MessageWithId {
 
 export const EmailHeader = (props: EmailHeaderProps) => {
   const [refresh, toggleRefresh] = useContext(RefreshContext)!;
+  const baseUrl = useContext(UrlContext);
 
   const onDelete = async (
     event?: React.MouseEvent<HTMLElement, MouseEvent>
@@ -19,7 +21,7 @@ export const EmailHeader = (props: EmailHeaderProps) => {
     try {
       const userId = props.isInbox ? props.receiver : props.sender;
       await axios.post(
-        `http://localhost:8080/messages/${userId}/deleteMessage/${props.id}`
+        `${baseUrl}/messages/${userId}/deleteMessage/${props.id}`
       );
       message.success("Message successfuly deleted");
     } catch (error) {

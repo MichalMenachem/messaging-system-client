@@ -2,6 +2,7 @@ import { SendOutlined, MailOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { UrlContext } from "../..";
 import { MessageWithId } from "../../models/Message";
 import { Emails } from "./emails-display/Emails";
 import { RefreshContext, SearchContext } from "./EmailsView";
@@ -18,10 +19,12 @@ export const EmailViewLayout = () => {
   const [refresh, toggleRefresh] = useContext(RefreshContext)!;
   const [searched, setSearched] = useContext(SearchContext)!;
 
+  const baseUrl = useContext(UrlContext);
+
   const fetchMessages = async () => {
     try {
       const inbox = await axios.get<Inbox>(
-        `http://localhost:8080/messages/${searched}/getAll`
+        `${baseUrl}/messages/${searched}/getAll`
       );
       setSent(inbox.data.sent);
       setReceived(inbox.data.received);

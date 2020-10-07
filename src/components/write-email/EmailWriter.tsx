@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Input, Button, message } from "antd";
 import { Message } from "../../models/Message";
 import "./email-writer.css";
 import axios from "axios";
+import { UrlContext } from "../..";
 
 const layout = {
   labelCol: { span: 3 },
@@ -16,13 +17,14 @@ const validateMessages = {
 
 export const EmailWriter = () => {
   const [form] = Form.useForm();
+  const baseUrl = useContext(UrlContext);
 
   const onFinish = async (values: Omit<Message, "creationDate">) => {
     try {
-      await axios.post(
-        `http://localhost:8080/messages/${values.sender}/writeMessage`,
-        { ...values, creationDate: new Date().toJSON() }
-      );
+      await axios.post(`${baseUrl}/messages/${values.sender}/writeMessage`, {
+        ...values,
+        creationDate: new Date().toJSON(),
+      });
       message.success("Message successfuly sent");
       console.log(values);
     } catch (error) {
