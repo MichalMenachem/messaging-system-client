@@ -21,7 +21,7 @@ export const EmailWriter = () => {
     try {
       await axios.post(
         `http://localhost:8080/messages/${values.sender}/writeMessage`,
-        { ...values, creationDate: new Date() }
+        { ...values, creationDate: new Date().toJSON() }
       );
       message.success("Message successfuly sent");
       console.log(values);

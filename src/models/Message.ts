@@ -3,7 +3,7 @@ export interface Message {
   receiver: string;
   content: string;
   subject: string;
-  creationDate: Date;
+  creationDate: string;
 }
 
 export type MessageWithId = Message & { id: number };

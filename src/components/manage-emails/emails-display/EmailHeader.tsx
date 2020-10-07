@@ -1,7 +1,9 @@
 import { DeleteOutlined } from "@ant-design/icons";
-import { Button } from "antd";
-import React from "react";
+import { Button, message, Popconfirm } from "antd";
+import axios from "axios";
+import React, { useContext } from "react";
 import { MessageWithId } from "../../../models/Message";
+import { RefreshContext } from "../EmailViewLayout";
 import "./emails.css";
 
 interface EmailHeaderProps extends MessageWithId {
@@ -9,6 +11,24 @@ interface EmailHeaderProps extends MessageWithId {
 }
 
 export const EmailHeader = (props: EmailHeaderProps) => {
+  const [refresh, toggleRefresh] = useContext(RefreshContext)!;
+
+  const onDelete = async (
+    event?: React.MouseEvent<HTMLElement, MouseEvent>
+  ) => {
+    try {
+      const userId = props.isInbox ? props.receiver : props.sender;
+      await axios.post(
+        `http://localhost:8080/messages/${userId}/deleteMessage/${props.id}`
+      );
+      message.success("Message successfuly deleted");
+    } catch (error) {
+      console.error(error);
+      message.error("Oops... Something went wrong");
+    }
+    toggleRefresh();
+  };
+
   return (
     <div className="email-header">
       <span className="email-header-item">
@@ -16,12 +36,18 @@ export const EmailHeader = (props: EmailHeaderProps) => {
       </span>
       <b className="email-header-item">{props.subject}</b>
       <span className="email-header-item">
-        {props.creationDate.toLocaleString()}
+        {new Date(props.creationDate).toLocaleString()}
       </span>
-      <Button
-        icon={<DeleteOutlined />}
-        onClick={(event) => event.stopPropagation()}
-      ></Button>
+      <div onClick={(event) => event.stopPropagation()}>
+        <Popconfirm
+          title="Are you sure you wish to delete?"
+          onConfirm={onDelete}
+          okText="Yes"
+          cancelText="Cancel"
+        >
+          <Button icon={<DeleteOutlined />}></Button>
+        </Popconfirm>
+      </div>
     </div>
   );
 };

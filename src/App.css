@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-image: url("https://image.freepik.com/free-vector/modern-abstract-background-liquid-fluid-style_26760-432.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: #80008073;
   min-height: 100vh;
   display: flex;
