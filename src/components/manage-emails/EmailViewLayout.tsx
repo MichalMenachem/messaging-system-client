@@ -22,14 +22,19 @@ export const EmailViewLayout = () => {
   const baseUrl = useContext(UrlContext);
 
   const fetchMessages = async () => {
-    try {
-      const inbox = await axios.get<Inbox>(
-        `${baseUrl}/messages/${searched}/getAll`
-      );
-      setSent(inbox.data.sent);
-      setReceived(inbox.data.received);
-    } catch (error) {
-      console.error(error);
+    if (searched !== "") {
+      try {
+        const inbox = await axios.get<Inbox>(
+          `${baseUrl}/messages/${searched}/getAll`
+        );
+        setSent(inbox.data.sent);
+        setReceived(inbox.data.received);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      setSent([]);
+      setReceived([]);
     }
   };
 
